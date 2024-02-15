@@ -68,7 +68,7 @@ const signupLoad = async (req, res) => {
         res.render('signup');
 
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
     }
 
 }
