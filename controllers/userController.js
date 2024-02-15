@@ -134,7 +134,11 @@ const editLoad = async (req, res) => {
         const id = req.query.id;
 
         const userData = await User.findById({_id: id});
-        
+        if(userData){}
+        else{
+            res.redirect('/');
+        }
+
 
 
     } catch (error) {
