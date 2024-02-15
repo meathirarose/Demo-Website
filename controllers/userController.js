@@ -103,8 +103,39 @@ const insertUser = async (req, res) => {
 const homeLoad = async (req, res) => {
 
     try {
+        const userData = await User.findById({_id:req.session.user_id});
+        res.render('home', { user: userData});
 
-        res.render('home');
+    } catch (error) {
+        console.log(error.message);
+    }
+
+}
+
+// user logout
+const userLogout = async (req, res) => {
+
+    try {
+        
+        req.session.destroy();
+        res.redirect('/');
+
+    } catch (error) {
+        console.log(error.message);
+    }
+
+}
+
+// user profile edit $ update
+const editLoad = async (req, res) => {
+
+    try {
+        
+        const id = req.query.id;
+
+        const userData = await User.findById({_id: id});
+        
+
 
     } catch (error) {
         console.log(error.message);
@@ -113,11 +144,12 @@ const homeLoad = async (req, res) => {
 }
 
 
-
 module.exports = {
     loginLoad,
     verifyLogin,
     signupLoad,
     insertUser,
-    homeLoad
+    homeLoad,
+    userLogout,
+    editLoad
 }

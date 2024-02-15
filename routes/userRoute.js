@@ -35,6 +35,11 @@ user_route.post('/login',userController.verifyLogin);
 // dashboard
 user_route.get('/home', authentication.isLogin, userController.homeLoad);
 
+// logout
+user_route.get('/logout', authentication.isLogin, userController.userLogout);
+
+// user edit
+user_route.get('/edit', authentication.isLogin, userController.editLoad)
 
 module.exports = {
     user_route
