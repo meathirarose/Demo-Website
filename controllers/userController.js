@@ -1,0 +1,123 @@
+const User = require("../models/userdbModel");
+const bcrypt = require('bcrypt');
+
+// login user
+const loginLoad = async (req, res) => {
+
+    try {
+
+        res.render("login");
+
+    } catch (error) {
+        console.log(error.message);
+    }
+
+}
+
+// verify login
+const verifyLogin = async (req, res) => {
+
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+
+        const userData = await User.findOne({ email: email });
+
+        if (userData) {
+
+            const passMatch = bcrypt.compare(password, userData.password)
+            if (passMatch) {
+                if (userData.is_varified === 0) {
+                    res.render('login', { message: 'Please verify your mail' });
+                } else {
+                    req.session.user_id = userData._id;
+                    res.redirect('/home');
+                }
+
+            } else {
+                res.render('login', { message: "Incorrect email and password" });
+            }
+
+        } else {
+            res.render('login', { message: "Incorrect email and password" });
+        }
+
+    } catch (error) {
+        console.log(error.message);
+    }
+
+}
+
+// password hash
+const securePassword = async (password) => {
+
+    try {
+        const passwordHash = await bcrypt.hash(password, 10)
+        return passwordHash;
+    } catch (error) {
+        console.log(error.message);
+    }
+
+}
+
+// signup
+const signupLoad = async (req, res) => {
+
+    try {
+
+        res.render('signup');
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+// submit user
+const insertUser = async (req, res) => {
+
+    try {
+        const spassword = await securePassword(req.body.password);
+        const user = new User({
+            name: req.body.name,
+            email: req.body.email,
+            mobile: req.body.mobile,
+            password: spassword,
+            is_admin: 0
+        });
+
+        const userData = await user.save();
+        if (userData) {
+            res.render('signup', { message: "Your registration has been Successfull..!!" });
+        } else {
+            res.render('signup', { message: "Your registration has been Failed..!!" });
+        }
+
+    } catch (error) {
+        console.log(error.message);
+    }
+
+}
+
+// dashboard
+const homeLoad = async (req, res) => {
+
+    try {
+
+        res.render('home');
+
+    } catch (error) {
+        console.log(error.message);
+    }
+
+}
+
+
+
+module.exports = {
+    loginLoad,
+    verifyLogin,
+    signupLoad,
+    insertUser,
+    homeLoad
+}
