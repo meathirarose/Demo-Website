@@ -8,7 +8,7 @@ const config = require('../config/config');
 user_route.use(session({secret:config.sessionSecret}))
 
 // middleware
-const authentication = require('../middleware/authentication');
+const authentication = require('../middleware/userAuthentication');
 
 // bodyparser
 const bodyparser = require('body-parser');
@@ -38,8 +38,9 @@ user_route.get('/home', authentication.isLogin, userController.homeLoad);
 // logout
 user_route.get('/logout', authentication.isLogin, userController.userLogout);
 
-// user edit
-user_route.get('/edit', authentication.isLogin, userController.editLoad)
+
+
+
 
 module.exports = {
     user_route

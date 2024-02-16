@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
     is_varified: {
         type: Number,
         required: true,
-        default: 0
+        default: 1
     }
 
 })

@@ -25,7 +25,7 @@ const verifyLogin = async (req, res) => {
 
         if (userData) {
 
-            const passMatch = bcrypt.compare(password, userData.password)
+            const passMatch = await bcrypt.compare(password, userData.password)
             if (passMatch) {
                 if (userData.is_varified === 0) {
                     res.render('login', { message: 'Please verify your mail' });
@@ -88,9 +88,9 @@ const insertUser = async (req, res) => {
 
         const userData = await user.save();
         if (userData) {
-            res.render('signup', { message: "Your registration has been Successfull..!!" });
+            res.render('signup', { message: "Registered Successfully..!!" });
         } else {
-            res.render('signup', { message: "Your registration has been Failed..!!" });
+            res.render('signup', { message: "Registration Failed..!!" });
         }
 
     } catch (error) {

@@ -1,0 +1,43 @@
+<%- include('../layout/header') -%>
+
+<style>
+    .container{
+        background-color: rgb(175, 202, 213);
+        border-radius: 10px;
+    }
+
+    .center-div{
+        padding-top: 5%;  
+    }
+
+    .email,.mobile{
+        font-weight: 500;
+    }
+
+    .name{
+        font-style: italic;
+    }
+
+</style>
+
+
+<div class="text-center center-div mt-5 ">
+    <div class="container w-25 border py-5 mt-5">
+
+        <h3>Hello, <span class="name"><%= admin.name %></span> </h3>
+
+        <a href="/admin/dashboard">Link to Dashboard</a><br><br>
+
+        <div>
+            <p class="text-center"><span class="email">Email:&emsp;&emsp;</span> <%= admin.email %></p>
+        </div>
+        <div>
+            <p class="text-center"><span class="mobile">Mobile Number:</span> <%= admin.mobile %></p>
+        </div>
+
+        <br>
+        <a href="/admin/adminLogout">Logout</a>
+    </div>
+</div>
+
+<%- include('../layout/footer') -%>

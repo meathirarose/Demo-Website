@@ -1,0 +1,38 @@
+<%- include('../layout/header') -%>
+
+    <h3>Welcome to dashboard</h3>
+
+    <a href="/admin/newUser">Add User</a>
+    <br><br>
+    <table width="30%">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Verified</th>
+        </tr>
+
+        <% if(users.length> 0){
+            for(let i=0;i<users.length;i++){ %>
+                <tr>
+                    <td><%= users[i].name %></td>
+                    <td><%= users[i].email %></td>
+                    <td><%= users[i].mobile %></td>
+                    <td>
+                        <% if(users[i].is_varified===0){ 
+                            %>Not Verified<% 
+                        } else{ 
+                            %>Verified
+                        <% } %>
+                    </td>
+                </tr>
+                <% } }else{ %>
+                    <tr>
+                        <td colspan="5">Users Not Found</td>
+                    </tr>
+                    <% } %>
+    </table>
+    <br><br>
+    <a href="/admin/adminHome">Go To Home</a>
+
+    <%- include('../layout/header') -%>
