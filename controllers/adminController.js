@@ -152,6 +152,19 @@ const addNewUser = async (req, res) => {
 
 }
 
+// edit user
+const editUserLoad = async (req, res) => {
+
+    try {
+        
+        res.render('editUser');
+
+    } catch (error) {
+        console.error(error.message);
+    }
+
+}
+
 
 module.exports = {
     adminLoad,
@@ -160,5 +173,6 @@ module.exports = {
     adminLogout,
     adminDashboard,
     addNewUserLoad,
-    addNewUser
+    addNewUser,
+    editUserLoad
 }

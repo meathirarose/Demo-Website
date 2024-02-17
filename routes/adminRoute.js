@@ -37,11 +37,13 @@ admin_route.get('/adminLogout', adminAuthentication.isAdminLogin, adminControlle
 admin_route.get('/dashboard', adminAuthentication.isAdminLogin, adminController.adminDashboard);
 
 // add new user page load
-admin_route.get('/newUser', adminAuthentication.isAdminLogin, adminController.addNewUserLoad);
+admin_route.get('/addNewUser', adminAuthentication.isAdminLogin, adminController.addNewUserLoad);
 
 // add new user
 admin_route.post('/newUser',adminController.addNewUser);
 
+// edit user
+admin_route.get('/editUser', adminAuthentication.isAdminLogin, adminController.editUserLoad);
 
 admin_route.get('*', (req,res) => {
     res.redirect("/admin");

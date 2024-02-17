@@ -1,28 +1,65 @@
 <%- include('../layout/header') -%>
 
 <style>
-    .container{
-        background-color: rgb(175, 202, 213);
-        border-radius: 10px;
-    }
+  .message {
+            color: rgb(16, 21, 16);
+        }
 
-    .center-div{
-        padding-top: 5%;  
-    }
+        .adminLogin {
+            font-weight: bolder;
+        }
 
-    .email,.mobile{
-        font-weight: 500;
-    }
+        .box{
+            background-color: #3d4b81;
+        }
 
-    .name{
-        font-style: italic;
-    }
+        .boxx{
+            height: 450px;
+            padding-top: 50px;
+        }
+
+        a{
+            text-decoration: none;
+        }
 
 </style>
 
+<section class="vh-100 gradient-custom">
+    <div class="container-fluid h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100 box">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark boxx text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <h3>Hello, <span class="name"><%= admin.name %></span> </h3>
+                        <div class="mb-md-5 mt-md-5">
+                            
+                            <div>
+                                <p class="text-center"><span class="email">Email:&emsp;&emsp;</span> <%= admin.email %></p>
+                            </div>
+                            <div>
+                                <p class="text-center"><span class="mobile">Mobile Number:</span> <%= admin.mobile %></p>
+                            </div>   
+                            <br>                          
+                            <button class="btn btn-outline-light btn-lg px-5"><a href="/admin/dashboard">Dashboard</a></button>
+                            <button class="btn btn-outline-light btn-lg px-5"><a href="/admin/adminLogout">Logout</a></button>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<div class="text-center center-div mt-5 ">
-    <div class="container w-25 border py-5 mt-5">
+
+
+
+
+
+
+<!-- <div>
+<div class="text-center outer center-div">
+    <div class="container box border mt-5">
 
         <h3>Hello, <span class="name"><%= admin.name %></span> </h3>
 
@@ -38,6 +75,6 @@
         <br>
         <a href="/admin/adminLogout">Logout</a>
     </div>
-</div>
+</div> -->
 
 <%- include('../layout/footer') -%>

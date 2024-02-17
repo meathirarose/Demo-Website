@@ -10,6 +10,7 @@
             <th>Email</th>
             <th>Mobile</th>
             <th>Verified</th>
+            <th>Actions</th>
         </tr>
 
         <% if(users.length> 0){
@@ -25,6 +26,7 @@
                             %>Verified
                         <% } %>
                     </td>
+                    <td><a href="/admin/editUser">Edit</a></td>
                 </tr>
                 <% } }else{ %>
                     <tr>
