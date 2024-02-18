@@ -77,21 +77,36 @@ const signupLoad = async (req, res) => {
 const insertUser = async (req, res) => {
 
     try {
-        const spassword = await securePassword(req.body.password);
-        const user = new User({
-            name: req.body.name,
-            email: req.body.email,
-            mobile: req.body.mobile,
-            password: spassword,
-            is_admin: 0
-        });
+        if (/^[A-Za-z.]+$/.test(req.body.name)) {
+            if (/[A-Za-z0-9._%+-]+@gmail.com/.test(req.body.email)) {
+                const checkemail = await User.findOne({ email: req.body.email })
+                if (checkemail) {
+                    res.render('signup', { message: "Email is already exist..!" })
+                } else {
 
-        const userData = await user.save();
-        if (userData) {
-            res.render('signup', { message: "Registered Successfully..!!" });
+                    const spassword = await securePassword(req.body.password);
+                    const user = new User({
+                        name: req.body.name,
+                        email: req.body.email,
+                        mobile: req.body.mobile,
+                        password: spassword,
+                        is_admin: 0
+                    });
+
+                    const userData = await user.save();
+                    if (userData) {
+                        res.render('signup', { message: "Registered Successfully..!!" });
+                    } else {
+                        res.render('signup', { message: "Registration Failed..!!" });
+                    }
+                }
+            } else {
+                res.render('signup', { message: "give correct structure in email" })
+            }
         } else {
-            res.render('signup', { message: "Registration Failed..!!" });
+            res.render('signup', { message: "the structure of name is not correct" })
         }
+
 
     } catch (error) {
         console.log(error.message);
@@ -103,9 +118,9 @@ const insertUser = async (req, res) => {
 const homeLoad = async (req, res) => {
 
     try {
-        const userData = await User.findById({_id:req.session.user_id});
+        const userData = await User.findById({ _id: req.session.user_id });
 
-            res.render('home', { user: userData});  
+        res.render('home', { user: userData });
 
     } catch (error) {
         console.log(error.message);
@@ -117,7 +132,7 @@ const homeLoad = async (req, res) => {
 const userLogout = async (req, res) => {
 
     try {
-        
+
         req.session.destroy();
         res.redirect('/');
 
@@ -131,12 +146,12 @@ const userLogout = async (req, res) => {
 const editLoad = async (req, res) => {
 
     try {
-        
+
         const id = req.query.id;
 
-        const userData = await User.findById({_id: id});
-        if(userData){}
-        else{
+        const userData = await User.findById({ _id: id });
+        if (userData) { }
+        else {
             res.redirect('/');
         }
 

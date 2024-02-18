@@ -29,10 +29,13 @@
                         <div class="mb-md-1 mt-md-1" >
                             
                             <form>
+                                
                                 <input type="text" placeholder="Search something....." name="search">
                                 <input type="submit" value="Search">
                             </form>
-                            <br><br>
+                            <br>
+                            
+                            
                             <table class= "no-wrap user-table mb-0 tab" width="100%">
                                 <tr>
                                     <th class="head">Name</th>
@@ -65,7 +68,10 @@
                                             <% } %>
                             </table>
                            <br><br>
+                           <div>
+                           <button class="btn btn-outline-light btn-lg px-2"><a class="anchor" href="/admin/newUser">Add User</a></button>
                            <button class="btn btn-outline-light btn-lg px-5"><a class="anchor" href="/admin/adminHome">Go To Home</a></button>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -74,75 +80,5 @@
     </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- <h3>Admin Dashboard</h3>
-
-    <a href="/admin/newUser">Add User</a>
-    <br><br>
-    <form>
-        <input type="text" placeholder="Search something....." name="search">
-        <input type="submit" value="Search">
-    </form>
-    <table class= "no-wrap user-table mb-0" width="50%">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>Verified</th>
-            <th>Actions</th>
-        </tr>
-
-        <% if(users.length> 0){
-            for(let i=0;i<users.length;i++){ %>
-                <tr>
-                    <td><%= users[i].name %></td>
-                    <td><%= users[i].email %></td>
-                    <td><%= users[i].mobile %></td>
-                    <td>
-                        <% if(users[i].is_varified===0){ 
-                            %>Not Verified<% 
-                        } else{ 
-                            %>Verified
-                        <% } %>
-                    </td>
-                    <td><a href="/admin/editUser?id=<%= users[i]._id %>">Edit</a>&nbsp;
-                    <a href="/admin/deleteUser?id=<%= users[i]._id %>">Delete</a></td>
-                </tr>
-                <% } }else{ %>
-                    <tr>
-                        <td colspan="5">Users Not Found</td>
-                    </tr>
-                    <% } %>
-    </table>
-    <br><br>
-    <a href="/admin/adminHome">Go To Home</a> -->
 
     <%- include('../layout/header') -%>

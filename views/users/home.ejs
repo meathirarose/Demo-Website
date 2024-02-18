@@ -1,31 +1,58 @@
 <%- include('../layout/header') -%>
 
-    <h3>Hello,<%= user.name %></h3>
+<style>
 
-    <table width="20%">
-        <tr>
-            <td>Email</td>
-            <td>
-                <%= user.email %>
-            </td>
-        </tr>
-        <tr>
-            <td>Mobile Number</td>
-            <td>
-                <%= user.mobile %>
-            </td>
-        </tr>
-        <tr>
-            <td>Verified</td>
-            <td>
-                <% if(user.is_varified == 1){ %> 
-                    True 
-                    <%}%>
-            </td>
-        </tr>
-    </table> 
-    
-    <a href="/logout">Logout</a>
-    <br>
+    .box{   
+        background-color: rgb(19, 41, 69);
+        }
 
+    .anchor{
+        text-decoration: none;
+    }
+
+    .textbold{
+        font-weight: 500;
+    }
+
+    .name{
+        font-weight: bolder;
+    }
+
+</style>
+
+
+<section class="vh-100 gradient-custom">
+    <div class="container-fluid h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100 box">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card boxx " style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <h3>Hello, <span class="name"><%= user.name %></span> </h3>
+                        <div class="mb-md-5 mt-md-5">
+                            
+                            <div>
+                                <p class="text-center"><span class="textbold">Email:</span>&emsp; <%= user.email %></p>
+                            </div>
+                            <div>
+                                <p class="text-center"><span class="textbold">Mobile Number:</span>&nbsp;&nbsp; <%= user.mobile %></p>
+                            </div> 
+                            <div>
+                                <p class="text-center"><span class="textbold">Verified:</span>&nbsp;&nbsp; <% if(user.is_varified == 1){ %> 
+                                    True 
+                                    <%}%></p>
+                            </div>  
+                            <br>                          
+
+                            <button class="btn btn-dark btn-lg px-5"><a class="anchor" href="/logout">Logout</a></button>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  
     <%- include('../layout/footer') -%>

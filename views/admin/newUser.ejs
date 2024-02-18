@@ -34,7 +34,15 @@
               <h2 class="text-uppercase text-center mb-3 text-white">Create new User</h2>
 
               <form action="" method="post">
-
+                <div class="d-flex justify-content-center message"> 
+                  <%
+                  if(typeof message !== 'undefined'){
+                      %>
+                      <p><%= message %></p>
+                      <%
+                  }
+                  %>
+              </div>
                 <div class="form-outline text-white">
                   <input type="text" id="form3Example1cg" name="name" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example1cg">Your Name</label>
@@ -60,15 +68,7 @@
                     <br><br>
                     
                 </div><br>
-                <div class="d-flex justify-content-center message"> 
-                    <%
-                    if(typeof message !== 'undefined'){
-                        %>
-                        <p><%= message %></p>
-                        <%
-                    }
-                    %>
-                </div>
+               
                 <br>
                 <a class="d-flex justify-content-center " href="/admin/dashboard"> Go to Dashboard </a>
                 
