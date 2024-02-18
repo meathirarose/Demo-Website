@@ -34,7 +34,7 @@ admin_route.get('/adminHome', adminAuthentication.isAdminLogin, adminController.
 admin_route.get('/adminLogout', adminAuthentication.isAdminLogin, adminController.adminLogout);
 
 // admin dashboard
-admin_route.get('/dashboard', adminAuthentication.isAdminLogin, adminController.adminDashboard);
+admin_route.get('/adminDashboard', adminAuthentication.isAdminLogin, adminController.adminDashboard);
 
 // add new user page load
 admin_route.get('/newUser', adminAuthentication.isAdminLogin, adminController.addNewUserLoad);

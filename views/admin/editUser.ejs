@@ -32,6 +32,15 @@
                             <br>
                             <form action="" method="post">
 
+                                <div class="d-flex justify-content-center message"> 
+                                    <%
+                                    if(typeof message !== 'undefined'){
+                                        %>
+                                        <p><br><%= message %></p>
+                                        <%
+                                    }
+                                    %>
+                                </div>
                                 <div class="form-outline form-white mb-1">
                                     <input type="text" name="name" id="typeEmailX" value="<%= users.name %>" class="form-control form-control-lg" />
                                     <label class="form-label" for="typeEmailX">Name</label>
@@ -59,15 +68,7 @@
                                 <input type="hidden" name="id" value="<%= users._id %>">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Update User</button>
                                
-                                <div class="d-flex justify-content-center message"> 
-                                    <%
-                                    if(typeof message !== 'undefined'){
-                                        %>
-                                        <p><br><%= message %></p>
-                                        <%
-                                    }
-                                    %>
-                                </div>
+                                
                             </form>
                             <br>
                             <button class="btn btn-outline-light btn-lg px-5" type="submit"><a class="dash" href="/admin/dashboard">Go to Dashboard</a></button>

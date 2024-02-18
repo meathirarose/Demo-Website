@@ -2,7 +2,11 @@
 const isAdminLogin = async (req, res, next) => {
 
     try {
-        if (!req.session.admin_id) { 
+
+        if(req.session.user_id){
+            res.redirect('/');
+        }
+        else if (!req.session.admin_id) { 
             res.redirect('/admin');
         }
         
@@ -17,8 +21,14 @@ const isAdminLogin = async (req, res, next) => {
 const isAdminLogout = async (req, res, next) => {
     
     try {
-        if (req.session.admin_id) {
+
+        if(req.session.user_id){
+            res.redirect('/');
+        }
+        else if (req.session.admin_id) {
+
             return res.redirect('/admin/adminHome');
+            
         }else{
             next();
         }

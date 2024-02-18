@@ -1,6 +1,109 @@
 <%- include('../layout/header') -%>
+<style>
 
-    <h3>Admin Dashboard</h3>
+    .outer{
+        background-color: #3d4b81;
+    }
+
+    .anchor{
+        text-decoration: none;
+    }
+
+    .tab{
+        line-height: 30px;
+    }
+
+    .head{
+        text-decoration: underline;
+    }
+    
+</style>
+
+<section class="vh-100 gradient-custom">
+    <div class="container-fluid h-100 outer">
+        <div class="row d-flex justify-content-center align-items-center h-100 box ">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5 w-75 ">
+                <div class="card bg-dark boxx text-white " style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <h1>Admin Dashboard</h1>
+                        <div class="mb-md-1 mt-md-1" >
+                            
+                            <form>
+                                <input type="text" placeholder="Search something....." name="search">
+                                <input type="submit" value="Search">
+                            </form>
+                            <br><br>
+                            <table class= "no-wrap user-table mb-0 tab" width="100%">
+                                <tr>
+                                    <th class="head">Name</th>
+                                    <th class="head">Email</th>
+                                    <th class="head">Mobile</th>
+                                    <th class="head">Verified</th>
+                                    <th class="head">Actions</th>
+                                </tr>
+                        
+                                <% if(users.length> 0){
+                                    for(let i=0;i<users.length;i++){ %>
+                                        <tr>
+                                            <td><%= users[i].name %></td>
+                                            <td><%= users[i].email %></td>
+                                            <td><%= users[i].mobile %></td>
+                                            <td>
+                                                <% if(users[i].is_varified===0){ 
+                                                    %>Not Verified<% 
+                                                } else{ 
+                                                    %>Verified
+                                                <% } %>
+                                            </td>
+                                            <td><button class="btn btn-outline-light btn-lg px-4"><a class="anchor" href="/admin/editUser?id=<%= users[i]._id %>">Edit</a></button>&nbsp;
+                                                <button class="btn btn-outline-light btn-lg px-4"><a class="anchor" href="/admin/deleteUser?id=<%= users[i]._id %>">Delete</a></button></td>
+                                        </tr>
+                                        <% } }else{ %>
+                                            <tr>
+                                                <td colspan="5">Users Not Found</td>
+                                            </tr>
+                                            <% } %>
+                            </table>
+                           <br><br>
+                           <button class="btn btn-outline-light btn-lg px-5"><a class="anchor" href="/admin/adminHome">Go To Home</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <h3>Admin Dashboard</h3>
 
     <a href="/admin/newUser">Add User</a>
     <br><br>
@@ -8,7 +111,7 @@
         <input type="text" placeholder="Search something....." name="search">
         <input type="submit" value="Search">
     </form>
-    <table width="50%">
+    <table class= "no-wrap user-table mb-0" width="50%">
         <tr>
             <th>Name</th>
             <th>Email</th>
@@ -40,6 +143,6 @@
                     <% } %>
     </table>
     <br><br>
-    <a href="/admin/adminHome">Go To Home</a>
+    <a href="/admin/adminHome">Go To Home</a> -->
 
     <%- include('../layout/header') -%>

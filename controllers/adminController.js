@@ -1,10 +1,5 @@
 const User = require('../models/userdbModel');
-const Admin = require('../models/userdbModel');
 const bcrypt = require('bcrypt');
-var emailCheck = '^[a-zA-Z0-9._%+-]+@(?:gmail|yahoo)\.com$';
-var numberCheck = '/^\d{10}$/';
-var nameCheck = '/^[A-Za-z.]+$/';
-
 
 // admin login
 const adminLoad = async (req, res) => {
@@ -26,8 +21,8 @@ const verifyAdminLogin = async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
 
-        const adminData = await Admin.findOne({ email: email });
-        
+        const adminData = await User.findOne({ email: email });
+
         if (adminData) {
 
             const passMatch = await bcrypt.compare(password, adminData.password);
@@ -40,7 +35,7 @@ const verifyAdminLogin = async (req, res) => {
                 } else {
 
                     req.session.admin_id = adminData._id;
-                  
+
                     res.redirect('/admin/adminHome');
                 }
 
@@ -59,11 +54,11 @@ const verifyAdminLogin = async (req, res) => {
 
 }
 
-// load admin dashboard
+// load admin home
 const loadDashboard = async (req, res) => {
 
     try {
-        const userData = await User.findById({ _id: req.session.user_id });
+        const userData = await User.findById({ _id: req.session.admin_id });
         res.render('adminHome', { admin: userData });
 
     } catch (error) {
@@ -143,38 +138,38 @@ const addNewUser = async (req, res) => {
 
     try {
 
-        if (emailCheck.test(req.body.email)) {
-            if(numberCheck.test(req.body.mobile)){
+        if (/^[a-zA-Z0-9._%+-]+@(?:gmail|yahoo).com$/.test(req.body.email)) {
+            if (/^\d{10}$/.test(req.body.mobile)) {
 
-            const checkMail = await User.findOne({email:req.body.email});
-            if (checkMail) {
-                res.render('newUser', { message: " Email already exists..!" });
-            } else {
-
-
-                const spassword = await securePassword(req.body.password);
-                const user = new User({
-                    name: req.body.name,
-                    email: req.body.email,
-                    mobile: req.body.mobile,
-                    password: spassword,
-                    is_admin: 0
-                });
-
-                const userData = await user.save();
-
-                if (userData) {
-
-                    res.render('newUser', {message: "User added Successfully..!"});
-
+                const checkMail = await User.findOne({ email: req.body.email });
+                if (checkMail) {
+                    res.render('newUser', { message: " Email already exists..!" });
                 } else {
-                    res.render('newUser', { message: "Failed to add User..!" });
+
+
+                    const spassword = await securePassword(req.body.password);
+                    const user = new User({
+                        name: req.body.name,
+                        email: req.body.email,
+                        mobile: req.body.mobile,
+                        password: spassword,
+                        is_admin: 0
+                    });
+
+                    const userData = await user.save();
+
+                    if (userData) {
+
+                        res.render('newUser', { message: "User added Successfully..!" });
+
+                    } else {
+                        res.render('newUser', { message: "Failed to add User..!" });
+                    }
                 }
+
+            } else {
+                res.render('newUser', { message: "Enter a valid mobile number..!" });
             }
-        
-        }else{
-            res.render('newUser', { message: "Enter a valid mobile number..!" });
-        }
 
         } else {
             res.render('newUser', { message: "Wrong mail structure..!" });
@@ -195,7 +190,7 @@ const editUserLoad = async (req, res) => {
         if (userData) {
             res.render('editUser', { users: userData });
         } else {
-            res.redirect('/admin/dashboard');
+            res.redirect('/admin/adminDashboard');
         }
 
     } catch (error) {
@@ -209,36 +204,28 @@ const updateUser = async (req, res) => {
 
     try {
 
-        const users = req.body.id;
-        if (nameCheck.test(req.body.name)) {
+        const users = await User.findOne({ _id: req.body.id })
+        const checkemail = await User.findOne({ email: req.body.email })
 
-            if (emailCheck.test(req.body.email)) {
-
-                const checkMail = await User.findOne({email:req.body.email});
-                if(checkMail){
-
-                    res.render('editUser', { message: " Email already exists..!" }); 
-                    
-                }else{
-
-                if (numberCheck.test(req.body.mobile)) {
-
-                const userData = await User.findByIdAndUpdate({ _id: users }, { $set: { name: req.body.name, email: req.body.email, mobile: req.body.mobile, is_varified: req.body.verify } });
-                if (userData) {
-                    res.redirect('/admin/dashboard');
-                }
-
-            } else {
-                res.render('editUser', { message: "Wrong mail structure..!", users });
-            }
+        if (checkemail && checkemail._id.toString() !== req.body.id) {
+            res.render('editUser', { users, message: "Email already exist" })
         }
-        }else{
-            res.render('editUser', { message: 'Enter a valid number..!'}, users);
+
+        const name = req.body.name; const email = req.body.email;
+        const emailRegex = /^[A-Za-z0-9.%+-]+@gmail\.com$/;
+
+        if (!emailRegex.test(email)) {
+            return res.render('editUser', { users, message: 'Invalid email provided' });
         }
-        } 
-        else {
-            res.render('editUser', { message: 'Wrong name structure..!', users })
+
+        if (!name || !/^[a-zA-Z][a-zA-Z\s]*$/
+            .test(name)) {
+            return res.render('editUser', { users, message: 'Invalid name provided' });
         }
+
+        const userData = await User.findByIdAndUpdate({ _id: req.body.id }, { $set: { name: req.body.name, email: req.body.email, mobile: req.body.mobile, is_varified: req.body.verify } })
+        res.redirect('/admin/adminDashboard')
+
     } catch (error) {
         console.log(error.message);
     }
@@ -252,7 +239,7 @@ const deleteUser = async (req, res) => {
 
         const id = req.query.id;
         const userData = await User.deleteOne({ _id: id },)
-        res.redirect('/admin/dashboard'); l
+        res.redirect('/admin/adminDashboard');
 
     } catch (error) {
         console.log(error.message);
