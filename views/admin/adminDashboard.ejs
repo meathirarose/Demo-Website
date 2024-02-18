@@ -7,6 +7,7 @@
 
     .anchor{
         text-decoration: none;
+        font-size:large;
     }
 
     .tab{
@@ -17,6 +18,22 @@
         text-decoration: underline;
     }
     
+    .search{
+        border-radius: 12px;
+        height: 32px;
+    }
+
+    .searchbtn{
+        width: 120px;
+        border-radius: 10px;
+        background-color: black;
+        
+    }
+
+    button{
+        height: 40px;
+    }
+    
 </style>
 
 <section class="vh-100 gradient-custom">
@@ -25,13 +42,13 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5 w-75 ">
                 <div class="card bg-dark boxx text-white " style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
-                        <h1>Admin Dashboard</h1>
+                        <h1>Admin Dashboard</h1><br>
                         <div class="mb-md-1 mt-md-1" >
                             
                             <form>
                                 
-                                <input type="text" placeholder="Search something....." name="search">
-                                <input type="submit" value="Search">
+                                <input type="text" class="w-50 search" placeholder="    Search something....." name="search">
+                                <input type="submit" class="searchbtn text-white tr" value="Search">
                             </form>
                             <br>
                             
@@ -58,8 +75,8 @@
                                                     %>Verified
                                                 <% } %>
                                             </td>
-                                            <td><button class="btn btn-outline-light btn-lg px-4"><a class="anchor" href="/admin/editUser?id=<%= users[i]._id %>">Edit</a></button>&nbsp;
-                                                <button class="btn btn-outline-light btn-lg px-4"><a class="anchor" href="/admin/deleteUser?id=<%= users[i]._id %>">Delete</a></button></td>
+                                            <td><button class="btn btn-outline-light btn-lg m-1 px-3 py-1"><a class="anchor" href="/admin/editUser?id=<%= users[i]._id %>">Edit</a></button>&nbsp;
+                                                <button class="btn btn-outline-light btn-lg px-4 py-1"><a class="anchor" href="/admin/deleteUser?id=<%= users[i]._id %>">Delete</a></button></td>
                                         </tr>
                                         <% } }else{ %>
                                             <tr>
@@ -67,10 +84,10 @@
                                             </tr>
                                             <% } %>
                             </table>
-                           <br><br>
+                           <br>
                            <div>
-                           <button class="btn btn-outline-light btn-lg px-2"><a class="anchor" href="/admin/newUser">Add User</a></button>
-                           <button class="btn btn-outline-light btn-lg px-5"><a class="anchor" href="/admin/adminHome">Go To Home</a></button>
+                           <button class="btn btn-outline-light btn-lg mx-1 px-2 py-1"><a class="anchor" href="/admin/newUser">Add User</a></button>
+                           <button class="btn btn-outline-light btn-lg px-5 py-1"><a class="anchor" href="/admin/adminHome">Go To Home</a></button>
                         </div>
                         </div>
                     </div>

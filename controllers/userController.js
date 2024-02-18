@@ -77,8 +77,9 @@ const signupLoad = async (req, res) => {
 const insertUser = async (req, res) => {
 
     try {
-        if (/^[A-Za-z.]+$/.test(req.body.name)) {
+        if (/^[a-zA-Z][a-zA-Z\s]*$/.test(req.body.name)) {
             if (/[A-Za-z0-9._%+-]+@gmail.com/.test(req.body.email)) {
+                if (/^\d{10}$/.test(req.body.mobile)) {
                 const checkemail = await User.findOne({ email: req.body.email })
                 if (checkemail) {
                     res.render('signup', { message: "Email is already exist..!" })
@@ -100,11 +101,15 @@ const insertUser = async (req, res) => {
                         res.render('signup', { message: "Registration Failed..!!" });
                     }
                 }
+            }else{
+                res.render('signup', { message: "Enter a valid number..!" })
+            }
+
             } else {
-                res.render('signup', { message: "give correct structure in email" })
+                res.render('signup', { message: "Enter a valid email..!" })
             }
         } else {
-            res.render('signup', { message: "the structure of name is not correct" })
+            res.render('signup', { message: "Enter a valid name..!" })
         }
 
 

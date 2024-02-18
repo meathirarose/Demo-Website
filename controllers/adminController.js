@@ -212,7 +212,7 @@ const updateUser = async (req, res) => {
         }
 
         const name = req.body.name; const email = req.body.email;
-        const emailRegex = /^[A-Za-z0-9.%+-]+@gmail\.com$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@(?:gmail|yahoo).com$/;
 
         if (!emailRegex.test(email)) {
             return res.render('editUser', { users, message: 'Invalid email provided' });
