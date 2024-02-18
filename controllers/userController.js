@@ -99,12 +99,13 @@ const insertUser = async (req, res) => {
 
 }
 
-// dashboard
+// home
 const homeLoad = async (req, res) => {
 
     try {
         const userData = await User.findById({_id:req.session.user_id});
-        res.render('home', { user: userData});
+
+            res.render('home', { user: userData});  
 
     } catch (error) {
         console.log(error.message);

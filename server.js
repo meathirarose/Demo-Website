@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
+const nocache = require('nocache');
+
 
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost:27017/loginDB");
+
+app.use(nocache());
 
 const PORT = process.env.PORT || 3000;
 

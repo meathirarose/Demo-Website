@@ -12,7 +12,7 @@
         background-color: #3d4b81;
     }
 
-    a{
+    .dash{
         text-decoration: none;
     }
 
@@ -32,34 +32,45 @@
                             <br>
                             <form action="" method="post">
 
-                                <div class="form-outline form-white mb-2">
-                                    <input type="text" name="name" id="typeEmailX" class="form-control form-control-lg" />
+                                <div class="form-outline form-white mb-1">
+                                    <input type="text" name="name" id="typeEmailX" value="<%= users.name %>" class="form-control form-control-lg" />
                                     <label class="form-label" for="typeEmailX">Name</label>
                                 </div>
 
-                                <div class="form-outline form-white mb-2">
-                                    <input type="email" name="email" id="typeEmailX" class="form-control form-control-lg" />
+                                <div class="form-outline form-white mb-1">
+                                    <input type="email" name="email" id="typeEmailX" value="<%= users.email %>" class="form-control form-control-lg" />
                                     <label class="form-label" for="typeEmailX">Email</label>
                                 </div>
 
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="mobile" id="typePasswordX" class="form-control form-control-lg" />
+                                <div class="form-outline form-white mb-1">
+                                    <input type="text" name="mobile" id="typePasswordX" value="<%= users.mobile %>" class="form-control form-control-lg" />
                                     <label class="form-label" for="typePasswordX">Mobile</label>
                                 </div>
 
                                 <div >
-                                    <input type="radio" name="is_varified"value="1" />
+                                    <input type="radio" name="verify" value="1" <% if(users.is_varified == 1){ %> checked <%} %>/>
                                     <label class="form-label" for="typePasswordX">Verified&emsp;&emsp;&emsp;&emsp;&emsp;</label>
                                                              
-                                    <input type="radio" name="is_varified"  value="0" />
+                                    <input type="radio" name="verify"  value="0" <% if(users.is_varified == 0){ %> checked <%} %> />
                                     <label class="form-label" for="typePasswordX">Not Verified</label>
                                
                                 </div>
                                 <br>
+                                <input type="hidden" name="id" value="<%= users._id %>">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Update User</button>
+                               
+                                <div class="d-flex justify-content-center message"> 
+                                    <%
+                                    if(typeof message !== 'undefined'){
+                                        %>
+                                        <p><br><%= message %></p>
+                                        <%
+                                    }
+                                    %>
+                                </div>
                             </form>
                             <br>
-                            <button class="btn btn-outline-light btn-lg px-5" type="submit"><a href="/admin">Go to Dashboard</a></button>
+                            <button class="btn btn-outline-light btn-lg px-5" type="submit"><a class="dash" href="/admin/dashboard">Go to Dashboard</a></button>
                         </div>
                     </div>
                 </div>

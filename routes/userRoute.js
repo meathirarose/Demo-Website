@@ -15,6 +15,7 @@ const bodyparser = require('body-parser');
 user_route.use(bodyparser.json());
 user_route.use(bodyparser.urlencoded({ extended: true }));
 
+
 // view engine and view
 user_route.set('view engine', 'ejs');
 user_route.set('views', './views/users');
@@ -32,7 +33,7 @@ user_route.get('/login', authentication.isLogout, userController.loginLoad);
 
 user_route.post('/login',userController.verifyLogin);
 
-// dashboard
+// home
 user_route.get('/home', authentication.isLogin, userController.homeLoad);
 
 // logout

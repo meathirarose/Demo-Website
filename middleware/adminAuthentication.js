@@ -1,12 +1,14 @@
-const isAdminLogin = async (req, res,next) => {
+
+const isAdminLogin = async (req, res, next) => {
 
     try {
-        
-        if(req.session.user_id){}
-        else{
+        if (!req.session.admin_id) { 
             res.redirect('/admin');
         }
-        next();
+        
+            next();
+        
+        
 
     } catch (error) {
         console.log(error.message);
@@ -15,13 +17,16 @@ const isAdminLogin = async (req, res,next) => {
 }
 
 const isAdminLogout = async (req, res, next) => {
-
+    
     try {
-        
-        if(req.session.user_id){
-            res.redirect('/admin/adminHome');
+        if (req.session.admin_id) {
+            return res.redirect('/admin/adminHome');
+        }else{
+            next();
         }
-        next();
+            
+        
+       
     } catch (error) {
         console.log(error.message);
     }
