@@ -78,7 +78,7 @@ const insertUser = async (req, res) => {
 
     try {
         if (/^[a-zA-Z][a-zA-Z\s]*$/.test(req.body.name)) {
-            if (/[A-Za-z0-9._%+-]+@gmail.com/.test(req.body.email)) {
+            if (/^[a-zA-Z0-9._%+-]+@(?:gmail|yahoo).com$/.test(req.body.email)) {
                 if (/^\d{10}$/.test(req.body.mobile)) {
                 const checkemail = await User.findOne({ email: req.body.email })
                 if (checkemail) {
