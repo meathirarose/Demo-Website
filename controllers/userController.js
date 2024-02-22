@@ -28,7 +28,7 @@ const verifyLogin = async (req, res) => {
             const passMatch = await bcrypt.compare(password, userData.password)
             if (passMatch) {
                 if (userData.is_varified === 0) {
-                    res.render('login', { message: 'Please verify your mail' });
+                    res.render('login', { message: 'Not verified' });
                 } else {
                     req.session.user_id = userData._id;
                     res.redirect('/home');

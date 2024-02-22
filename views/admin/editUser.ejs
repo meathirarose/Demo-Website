@@ -42,30 +42,30 @@
                                     %>
                                 </div>
                                 <div class="form-outline form-white mb-1">
-                                    <input type="text" name="name" id="typeEmailX" value="<%= users.name %>" class="form-control form-control-lg" />
+                                    <input type="text" name="name" required id="typeEmailX" value="<%= users.name %>" class="form-control form-control-lg" />
                                     <label class="form-label" for="typeEmailX">Name</label>
                                 </div>
 
                                 <div class="form-outline form-white mb-1">
-                                    <input type="email" name="email" id="typeEmailX" value="<%= users.email %>" class="form-control form-control-lg" />
+                                    <input type="email" name="email" required id="typeEmailX" value="<%= users.email %>" class="form-control form-control-lg" />
                                     <label class="form-label" for="typeEmailX">Email</label>
                                 </div>
 
                                 <div class="form-outline form-white mb-1">
-                                    <input type="text" name="mobile" id="typePasswordX" value="<%= users.mobile %>" class="form-control form-control-lg" />
+                                    <input type="text" name="mobile" required id="typePasswordX" value="<%= users.mobile %>" class="form-control form-control-lg" />
                                     <label class="form-label" for="typePasswordX">Mobile</label>
                                 </div>
 
                                 <div >
-                                    <input type="radio" name="verify" value="1" <% if(users.is_varified == 1){ %> checked <%} %>/>
+                                    <input type="radio" name="verify" required value="1" <% if(users.is_varified == 1){ %> checked <%} %>/>
                                     <label class="form-label" for="typePasswordX">Verified&emsp;&emsp;&emsp;&emsp;&emsp;</label>
                                                              
-                                    <input type="radio" name="verify"  value="0" <% if(users.is_varified == 0){ %> checked <%} %> />
+                                    <input type="radio" name="verify" required value="0" <% if(users.is_varified == 0){ %> checked <%} %> />
                                     <label class="form-label" for="typePasswordX">Not Verified</label>
                                
                                 </div>
                                 <br>
-                                <input type="hidden" name="id" value="<%= users._id %>">
+                                <input type="hidden" required name="id" value="<%= users._id %>">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Update User</button>
                                
                                 
